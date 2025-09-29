@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William Jenkins</title>
+    <style>
+        body {
+            font-family: "Comic Sans", serif;
+            color: black;
+            background-color: white;
+            margin: 20px;
+            scroll-behavior: smooth;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        hr {
+            border: 1px solid black;
+        }
+
+        .flash-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 8px 16px;
+            background-color: #ff0000;
+            color: white;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: "Times New Roman", serif;
+            z-index: 1000;
+        }
+
+        /* Instant red/white/blue jumps */
+        @keyframes redWhiteBlue {
+            0% {background-color: red;}
+            33% {background-color: white;}
+            66% {background-color: blue;}
+            100% {background-color: red;}
+        }
+
+        .strobe-bg {
+            animation: redWhiteBlue 0.15s steps(1) infinite;
+        }
+
+        /* Chi Rho image styling */
+        .chi-rho {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 30px;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Chi Rho Image linked to the homepage -->
+    <a href="index.html">
+        <img src="https://raw.githubusercontent.com/myrkwood137/suryamokkapati/main/chi_rho.png" alt="Chi Rho" class="chi-rho">
+    </a>
+
+    <h1>Surya Mokkapati</h1>
+    <p>This is my website.</p>
+
+    <ul>
+        <li><a href="#literature" onclick="flashTitle('literature')">Literature</a></li>
+        <li><a href="#music" onclick="flashTitle('music')">Music</a></li>
+        <li><a href="#thoughts" onclick="flashTitle('thoughts')">Thoughts</a></li>
+    </ul>
+
+    <hr>
+
+    <h2 id="literature">Literature</h2>
+    <p>Books and historical works.</p>
+    <ul>
+        <li><a href="byzantine_state_and_society.html">A History of Byzantine State and Society</a></li>
+    </ul>
+
+    <hr>
+
+    <h2 id="music">Music</h2>
+    <p>Album reviews.</p>
+    <ul>
+        <li><a href="once_sent_from_the_golden_hall.html">Once Sent from the Golden Hall - Amon Amarth</a></li>
+        <li><a href="ivth_crusade.html">The IVth Crusade - Bolt Thrower</a></li>
+        <li><a href="black_sabbath.html">Black Sabbath - Black Sabbath</a></li>
+    </ul>
+
+    <hr>
+
+    <h2 id="thoughts">Thoughts</h2>
+    <p>My thoughts for better or for worse.</p>
+    <p>I will have one eventually.</p>
+
+    <!-- Don't Press Me button -->
+    <button id="dontPress" class="flash-btn">Do NOT Press This Button</button>
+
+    <script>
+        let isPressed = false;
+
+        // Function to make the section title flash blue when clicked
+        function flashTitle(sectionId) {
+            const sectionTitle = document.getElementById(sectionId);
+
+            // Remove the flash class if it already exists (to prevent flashing multiple times)
+            sectionTitle.classList.remove('flash');
+
+            // Add the flash class to the title
+            sectionTitle.classList.add('flash');
+
+            // Remove the flash class after the animation ends (0.5s)
+            setTimeout(() => {
+                sectionTitle.classList.remove('flash');
+            }, 500); // Match the duration of the flash effect
+        }
+
+        // Activate/deactivate the strobe effect on button press
+        document.getElementById('dontPress').addEventListener('click', function () {
+            if (isPressed) {
+                // If already pressed, turn off the strobe effect
+                document.body.classList.remove('strobe-bg');
+                this.innerText = "Do NOT Press This Button";
+            } else {
+                // If not pressed, activate the strobe effect
+                document.body.classList.add('strobe-bg');
+                this.innerText = ":(";
+            }
+
+            // Toggle the pressed state
+            isPressed = !isPressed;
+        });
+    </script>
+</body>
+
+</html>
